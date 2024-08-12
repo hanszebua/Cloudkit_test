@@ -7,18 +7,35 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		437010992C616117004CA21A /* imagePicker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 437010982C616117004CA21A /* imagePicker.swift */; };
+		4370109B2C690316004CA21A /* petsLabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4370109A2C690316004CA21A /* petsLabel.swift */; };
 		4373DED62C5A8C65005A97F6 /* Cloudkit_testApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4373DED52C5A8C65005A97F6 /* Cloudkit_testApp.swift */; };
 		4373DED82C5A8C65005A97F6 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4373DED72C5A8C65005A97F6 /* ContentView.swift */; };
 		4373DEDA2C5A8C67005A97F6 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 4373DED92C5A8C67005A97F6 /* Assets.xcassets */; };
 		4373DEDD2C5A8C67005A97F6 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 4373DEDC2C5A8C67005A97F6 /* Preview Assets.xcassets */; };
+		4373DEE42C5A8EC3005A97F6 /* cloudkituser.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4373DEE32C5A8EC3005A97F6 /* cloudkituser.swift */; };
+		438625CC2C5FE86E00DFE2C3 /* checkuserVM.swift in Sources */ = {isa = PBXBuildFile; fileRef = 438625CB2C5FE86E00DFE2C3 /* checkuserVM.swift */; };
+		438625CE2C5FEBC800DFE2C3 /* cloudkitAddRecord.swift in Sources */ = {isa = PBXBuildFile; fileRef = 438625CD2C5FEBC800DFE2C3 /* cloudkitAddRecord.swift */; };
+		4388E0FC2C615EB100F1BCC9 /* cloudKitCRUDVM.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4388E0FB2C615EB100F1BCC9 /* cloudKitCRUDVM.swift */; };
+		4388E0FE2C615EDF00F1BCC9 /* petsModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4388E0FD2C615EDF00F1BCC9 /* petsModel.swift */; };
+		439CBEAE2C691ED300986434 /* tagsVM.swift in Sources */ = {isa = PBXBuildFile; fileRef = 439CBEAD2C691ED300986434 /* tagsVM.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		437010982C616117004CA21A /* imagePicker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = imagePicker.swift; sourceTree = "<group>"; };
+		4370109A2C690316004CA21A /* petsLabel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = petsLabel.swift; sourceTree = "<group>"; };
 		4373DED22C5A8C65005A97F6 /* Cloudkit_test.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Cloudkit_test.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		4373DED52C5A8C65005A97F6 /* Cloudkit_testApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Cloudkit_testApp.swift; sourceTree = "<group>"; };
 		4373DED72C5A8C65005A97F6 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
 		4373DED92C5A8C67005A97F6 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		4373DEDC2C5A8C67005A97F6 /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
+		4373DEE32C5A8EC3005A97F6 /* cloudkituser.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = cloudkituser.swift; sourceTree = "<group>"; };
+		4373DEE52C5A8F1B005A97F6 /* Cloudkit_test.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = Cloudkit_test.entitlements; sourceTree = "<group>"; };
+		438625CB2C5FE86E00DFE2C3 /* checkuserVM.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = checkuserVM.swift; sourceTree = "<group>"; };
+		438625CD2C5FEBC800DFE2C3 /* cloudkitAddRecord.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = cloudkitAddRecord.swift; sourceTree = "<group>"; };
+		4388E0FB2C615EB100F1BCC9 /* cloudKitCRUDVM.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = cloudKitCRUDVM.swift; sourceTree = "<group>"; };
+		4388E0FD2C615EDF00F1BCC9 /* petsModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = petsModel.swift; sourceTree = "<group>"; };
+		439CBEAD2C691ED300986434 /* tagsVM.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = tagsVM.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -32,6 +49,14 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		437010972C616107004CA21A /* components */ = {
+			isa = PBXGroup;
+			children = (
+				437010982C616117004CA21A /* imagePicker.swift */,
+			);
+			path = components;
+			sourceTree = "<group>";
+		};
 		4373DEC92C5A8C65005A97F6 = {
 			isa = PBXGroup;
 			children = (
@@ -51,8 +76,11 @@
 		4373DED42C5A8C65005A97F6 /* Cloudkit_test */ = {
 			isa = PBXGroup;
 			children = (
+				438625CA2C5FE1AD00DFE2C3 /* ViewModel */,
+				438625C92C5FE1A300DFE2C3 /* Model */,
+				438625C82C5FE19600DFE2C3 /* View */,
+				4373DEE52C5A8F1B005A97F6 /* Cloudkit_test.entitlements */,
 				4373DED52C5A8C65005A97F6 /* Cloudkit_testApp.swift */,
-				4373DED72C5A8C65005A97F6 /* ContentView.swift */,
 				4373DED92C5A8C67005A97F6 /* Assets.xcassets */,
 				4373DEDB2C5A8C67005A97F6 /* Preview Content */,
 			);
@@ -65,6 +93,36 @@
 				4373DEDC2C5A8C67005A97F6 /* Preview Assets.xcassets */,
 			);
 			path = "Preview Content";
+			sourceTree = "<group>";
+		};
+		438625C82C5FE19600DFE2C3 /* View */ = {
+			isa = PBXGroup;
+			children = (
+				437010972C616107004CA21A /* components */,
+				4373DED72C5A8C65005A97F6 /* ContentView.swift */,
+				4373DEE32C5A8EC3005A97F6 /* cloudkituser.swift */,
+				438625CD2C5FEBC800DFE2C3 /* cloudkitAddRecord.swift */,
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
+		438625C92C5FE1A300DFE2C3 /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				4388E0FD2C615EDF00F1BCC9 /* petsModel.swift */,
+				4370109A2C690316004CA21A /* petsLabel.swift */,
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
+		438625CA2C5FE1AD00DFE2C3 /* ViewModel */ = {
+			isa = PBXGroup;
+			children = (
+				439CBEAD2C691ED300986434 /* tagsVM.swift */,
+				438625CB2C5FE86E00DFE2C3 /* checkuserVM.swift */,
+				4388E0FB2C615EB100F1BCC9 /* cloudKitCRUDVM.swift */,
+			);
+			path = ViewModel;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -137,8 +195,16 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				438625CC2C5FE86E00DFE2C3 /* checkuserVM.swift in Sources */,
 				4373DED82C5A8C65005A97F6 /* ContentView.swift in Sources */,
 				4373DED62C5A8C65005A97F6 /* Cloudkit_testApp.swift in Sources */,
+				438625CE2C5FEBC800DFE2C3 /* cloudkitAddRecord.swift in Sources */,
+				4388E0FE2C615EDF00F1BCC9 /* petsModel.swift in Sources */,
+				437010992C616117004CA21A /* imagePicker.swift in Sources */,
+				4373DEE42C5A8EC3005A97F6 /* cloudkituser.swift in Sources */,
+				439CBEAE2C691ED300986434 /* tagsVM.swift in Sources */,
+				4388E0FC2C615EB100F1BCC9 /* cloudKitCRUDVM.swift in Sources */,
+				4370109B2C690316004CA21A /* petsLabel.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -269,6 +335,8 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_ENTITLEMENTS = Cloudkit_test/Cloudkit_test.entitlements;
+				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_ASSET_PATHS = "\"Cloudkit_test/Preview Content\"";
@@ -287,6 +355,7 @@
 				MARKETING_VERSION = 1.0;
 				PRODUCT_BUNDLE_IDENTIFIER = "Kucing.Cloudkit-test";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE_SPECIFIER = "";
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
@@ -298,6 +367,8 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_ENTITLEMENTS = Cloudkit_test/Cloudkit_test.entitlements;
+				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_ASSET_PATHS = "\"Cloudkit_test/Preview Content\"";
@@ -316,6 +387,7 @@
 				MARKETING_VERSION = 1.0;
 				PRODUCT_BUNDLE_IDENTIFIER = "Kucing.Cloudkit-test";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE_SPECIFIER = "";
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";

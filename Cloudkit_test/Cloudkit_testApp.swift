@@ -11,7 +11,7 @@ import SwiftUI
 struct Cloudkit_testApp: App {
     var body: some Scene {
         WindowGroup {
-            ContentView()
+            cloudkituser()
         }
     }
 }
