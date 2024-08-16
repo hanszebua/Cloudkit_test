@@ -1,34 +1,29 @@
 //
-//  cloudkitAddRecord.swift
+//  testprivateview.swift
 //  Cloudkit_test
 //
-//  Created by Hans Zebua on 05/08/24.
+//  Created by Hans Zebua on 15/08/24.
 //
 
 import SwiftUI
 import CloudKit
 
-struct cloudkitAddRecord: View {
+struct cloudkitAddRecordPrivate: View {
     
-    @StateObject private var vm = cloudKitCRUDVM()
-    @StateObject private var tagsvm = tagsVM()
+    @StateObject private var vm = privateDBTest()
     
-    @State private var petImage: UIImage?
-    @State private var showingImagePicker = false
     @State private var newName: String = ""
     
-    @State private var selectedPet: PetsModel? = nil
+    @State private var selectedPet: Dummy? = nil
     @State private var showingUpdateSheet = false
     
     @State private var searchTerm = ""
 
-    var filteredPet: [PetsModel] {
+    var filteredPet: [Dummy] {
         guard !searchTerm.isEmpty else { return vm.pets }
         return vm.pets.filter { $0.name.localizedCaseInsensitiveContains(searchTerm) }
     }
     
-    @State private var selectedTags: Set<String> = []
-
     var body: some View {
         NavigationStack {
             VStack {
@@ -39,40 +34,12 @@ struct cloudkitAddRecord: View {
                         .background(Color.gray.opacity(0.5))
                         .cornerRadius(4.0)
                     
-                    ZStack {
-                        if let petImage {
-                            Image(uiImage: petImage)
-                                .resizable()
-                                .frame(height: 200)
-                        } else {
-                            RoundedRectangle(cornerRadius: 10)
-                                .frame(height: 200)
-                            
-                            VStack {
-                                Image(systemName: "square.and.arrow.up")
-                                    .font(.largeTitle)
-                                    .foregroundColor(.blue)
-                                
-                                Text("Insert your Pets image here")
-                                    .foregroundColor(.blue)
-                            }
-                        }
-                    }
-                    .onTapGesture {
-                        self.showingImagePicker = true
-                    }
-                    .sheet(isPresented: $showingImagePicker) {
-                        ImagePicker(sourceType: .photoLibrary, image: $petImage)
-                    }
-                    
                     Text("Select Tags")
                         .padding()
                         .font(.title2)
-
-                    TagsPicker(selectedTags: $selectedTags, tagsvm: tagsvm)
                     
                     Button {
-                        vm.addButtonPressed(petImage: petImage, tags: selectedTags)
+                        vm.addButtonPressed()
                     } label: {
                         HStack {
                             Text("Add Item")
@@ -84,31 +51,17 @@ struct cloudkitAddRecord: View {
                         .padding()
                     }
                 }
-                .navigationTitle("Add New Records")
+                .navigationTitle("Add New Records privateDBTest")
                 .padding()
                 
                 if vm.pets.isEmpty {
-                    Text("Kosong bjir")
+                    Text("kosong bjir")
                 } else {
                     List {
-                        ForEach(filteredPet, id: \.self) { pet in
+                        ForEach(vm.pets, id: \.self) { pet in
                             VStack {
                                 HStack {
                                     Text(pet.name)
-                                    if let url = pet.imageURL, let data = try? Data(contentsOf: url), let image = UIImage(data: data) {
-                                        Image(uiImage: image)
-                                            .resizable()
-                                            .frame(width: 50, height: 50)
-                                    }
-                                }
-                                HStack {
-                                    ForEach(Array(pet.tags), id: \.self) { tag in
-                                        Text(tag)
-                                            .padding()
-                                            .background(Color.gray)
-                                            .clipShape(RoundedRectangle(cornerRadius: 10))
-                                            .foregroundColor(.white)
-                                    }
                                 }
                             }
                             .onTapGesture {
@@ -122,7 +75,6 @@ struct cloudkitAddRecord: View {
                 }
             }
             .padding()
-            .searchable(text: $searchTerm, placement: .navigationBarDrawer(displayMode: .always), prompt: "Search Menu")
             .sheet(isPresented: $showingUpdateSheet) {
                 VStack {
                     Text("Update Name")
@@ -152,5 +104,5 @@ struct cloudkitAddRecord: View {
 
 
 #Preview {
-    cloudkitAddRecord()
+    cloudkitAddRecordPrivate()
 }

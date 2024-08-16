@@ -11,64 +11,93 @@ import CloudKit
 
 class tagsVM: ObservableObject {
     @Published var text: String = ""
-    @Published var tags: [petsLabel] = []
- 
-    init () {
-        fetchItems()
+    @Published var publicTags: [petsLabel] = []
+    @Published var privateTags: [petsLabel] = []
+    
+    init() {
+        // Optionally fetch both public and private data at initialization
+        fetchItems(from: .publicDB)
+        fetchItems(from: .privateDB)
     }
     
-    private func addItem(name: String, petImage: UIImage?) {
-        let newPet = CKRecord(recordType: "Pets")
-        newPet["name"] =  name
+    func addUserPreferences(tags: Set<String>) {
+        guard !tags.isEmpty else { return }
+        for tag in tags {
+            addItem(name: tag)
+        }
+    }
+    
+    private func addItem(name: String) {
+        let newTag = CKRecord(recordType: "Tags")
+        newTag["name"] = name
         
-        saveItem(record: newPet)
+        saveUserPreferences(record: newTag)
     }
     
-    private func saveItem(record: CKRecord) {
-        CKContainer.default().publicCloudDatabase.save(record) { [weak self] returnedRecord, returnedError in
+    private func saveUserPreferences(record: CKRecord) {
+        CKContainer.default().privateCloudDatabase.save(record) { [weak self] returnedRecord, returnedError in
             DispatchQueue.main.async {
                 if let savedRecord = returnedRecord {
                     let name = savedRecord["name"] as? String ?? ""
-                    let newPet = petsLabel(name: name, record: savedRecord)
+                    let newTag = petsLabel(name: name, record: savedRecord)
                     
-                    self?.tags.append(newPet)
+                    self?.privateTags.append(newTag) // Assuming new tags are private
                 }
                 self?.text = ""
             }
         }
     }
     
-    func fetchItems() {
+    enum DatabaseType {
+        case publicDB
+        case privateDB
+    }
+    
+    func fetchItems(from databaseType: DatabaseType) {
         let predicate = NSPredicate(value: true)
-        let querry = CKQuery(recordType: "Tags", predicate: predicate)
-        let querryOperation = CKQueryOperation(query: querry)
+        let query = CKQuery(recordType: "Tags", predicate: predicate)
+        let queryOperation = CKQueryOperation(query: query)
         
         var returnedItems: [petsLabel] = []
         
-        querryOperation.recordMatchedBlock = { (returnedRecordID, returnedresult) in
-            switch returnedresult {
+        queryOperation.recordMatchedBlock = { (returnedRecordID, returnedResult) in
+            switch returnedResult {
             case .success(let record):
                 guard let name = record["name"] as? String else { return }
                 returnedItems.append(petsLabel(name: name, record: record))
             case .failure(let error):
-                break
+                print("Error fetching record: \(error.localizedDescription)")
             }
         }
         
-        querryOperation.queryResultBlock = { [weak self] returnedResult in
-                print("\(returnedResult)")
+        queryOperation.queryResultBlock = { [weak self] returnedResult in
+            print("Fetch result: \(returnedResult)")
             
             DispatchQueue.main.async {
-                self?.tags = returnedItems
+                switch databaseType {
+                case .publicDB:
+                    self?.publicTags = returnedItems
+                case .privateDB:
+                    self?.privateTags = returnedItems
+                    print("Private Fetch result: \(returnedResult)")
+                }
             }
         }
         
-        addOperation(operation: querryOperation)
+        addOperation(operation: queryOperation, to: databaseType)
     }
     
-    func addOperation(operation: CKDatabaseOperation) {
-        CKContainer.default().publicCloudDatabase.add(operation)
+    private func addOperation(operation: CKDatabaseOperation, to databaseType: DatabaseType) {
+        let database: CKDatabase
+        
+        switch databaseType {
+        case .publicDB:
+            database = CKContainer.default().publicCloudDatabase
+        case .privateDB:
+            database = CKContainer.default().privateCloudDatabase
+        }
+        
+        database.add(operation)
     }
-    
 }
 

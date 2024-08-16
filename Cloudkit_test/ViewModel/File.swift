@@ -1,44 +1,30 @@
 //
-//  cloudKitCRUDVM.swift
+//  File.swift
 //  Cloudkit_test
 //
-//  Created by Hans Zebua on 06/08/24.
+//  Created by Hans Zebua on 13/08/24.
 //
 
 import Foundation
-import CloudKit
 import SwiftUI
+import CloudKit
 
-class cloudKitCRUDVM: ObservableObject {
+class publicDBTest: ObservableObject {
     @Published var text: String = ""
-    @Published var pets: [PetsModel] = []
+    @Published var pets: [Dummy] = []
     
     init() {
         fetchItems()
     }
     
-    func addButtonPressed(petImage: UIImage?, tags: Set<String>) {
+    func addButtonPressed() {
         guard !text.isEmpty else { return }
-        addItem(name: text, petImage: petImage, tags: tags)
+        addItem(name: text)
     }
     
-    private func addItem(name: String, petImage: UIImage?, tags: Set<String>) {
-        let newPet = CKRecord(recordType: "Pets")
+    private func addItem(name: String) {
+        let newPet = CKRecord(recordType: "TestPublic")
         newPet["name"] = name
-        newPet["tags"] = Array(tags) as CKRecordValue // Add tags to the record
-
-        if let image = petImage,
-           let url = FileManager.default.urls(for: .cachesDirectory, in: .userDomainMask).first?.appendingPathComponent(UUID().uuidString + ".jpg"),
-           let data = image.jpegData(compressionQuality: 1.0) {
-            
-            do {
-                try data.write(to: url)
-                let asset = CKAsset(fileURL: url)
-                newPet["image"] = asset
-            } catch let error {
-                print(error)
-            }
-        }
         
         saveItem(record: newPet) // Save the record (with or without an image)
     }
@@ -48,11 +34,8 @@ class cloudKitCRUDVM: ObservableObject {
             DispatchQueue.main.async {
                 if let savedRecord = returnedRecord {
                     let name = savedRecord["name"] as? String ?? ""
-                    let imageAsset = savedRecord["image"] as? CKAsset
-                    let imageURL = imageAsset?.fileURL
-                    let tags = savedRecord["tags"] as? [String] ?? [] // Fetch the tags
-                    let newPet = PetsModel(name: name, record: savedRecord, imageURL: imageURL, tags: tags)
-                                        
+                    let newPet = Dummy(name: name, record: savedRecord)
+                    
                     self?.pets.append(newPet)
                 }
                 self?.text = ""
@@ -62,26 +45,22 @@ class cloudKitCRUDVM: ObservableObject {
     
     func fetchItems() {
         let predicate = NSPredicate(value: true)
-        let query = CKQuery(recordType: "Pets", predicate: predicate)
+        let query = CKQuery(recordType: "TestPublic", predicate: predicate)
         let queryOperation = CKQueryOperation(query: query)
         
-        var returnedItems: [PetsModel] = []
+        var returnedItems: [Dummy] = []
         
         queryOperation.recordMatchedBlock = { (returnedRecordID, returnedResult) in
             switch returnedResult {
             case .success(let record):
                 guard let name = record["name"] as? String else { return }
-                let imageAsset = record["image"] as? CKAsset
-                let imageURL = imageAsset?.fileURL
-                let tags = record["tags"] as? [String] ?? [] // Fetch the tags
-                returnedItems.append(PetsModel(name: name, record: record, imageURL: imageURL, tags: tags))
+                returnedItems.append(Dummy(name: name, record: record))
             case .failure(let error):
                 print(error)
             }
         }
         
         queryOperation.queryResultBlock = { [weak self] returnedResult in
-            print("\(returnedResult)")
             DispatchQueue.main.async {
                 self?.pets = returnedItems
             }
@@ -94,7 +73,7 @@ class cloudKitCRUDVM: ObservableObject {
         CKContainer.default().publicCloudDatabase.add(operation)
     }
     
-    func updateItem(pet: PetsModel, newName: String) {
+    func updateItem(pet: Dummy, newName: String) {
         let record = pet.record
         record["name"] = newName
         
@@ -113,5 +92,4 @@ class cloudKitCRUDVM: ObservableObject {
             }
         }
     }
-    
 }
